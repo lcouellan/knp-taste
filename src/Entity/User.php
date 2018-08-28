@@ -3,14 +3,12 @@
 namespace App\Entity;
 
 use Knp\Rad\User\HasPassword;
-use Knp\Rad\User\HasSalt;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class User implements HasPassword, UserInterface
 {
 
     use HasPassword\HasPassword;
-    use HasSalt\HasSalt;
 
     private $id;
 
@@ -19,8 +17,6 @@ class User implements HasPassword, UserInterface
     private $password;
 
     private $username;
-
-    private $salt;
 
     public function getId(): ?int
     {
@@ -78,5 +74,17 @@ class User implements HasPassword, UserInterface
     public function getRoles()
     {
         return ['ROLE_USER'];
+    }
+
+    /**
+     * Returns the salt that was originally used to encode the password.
+     *
+     * This can return null if the password was not encoded using a salt.
+     *
+     * @return string|null The salt
+     */
+    public function getSalt()
+    {
+        return null;
     }
 }

@@ -4,7 +4,10 @@ security:
             algorithm: bcrypt
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        in_memory: { memory: ~ }
+      user_provider:
+        entity:
+          class: App\Entity\User
+          property: username
     firewalls:
         main:
             anonymous: ~
