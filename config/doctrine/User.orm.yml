@@ -14,6 +14,7 @@ App\Entity\User:
         email:
             type: string
             nullable: false
+            unique: true
             length: 100
             options:
                 fixed: false
@@ -25,6 +26,7 @@ App\Entity\User:
                 fixed: false
         username:
             type: string
+            unique: true
             nullable: false
             length: 30
             options:

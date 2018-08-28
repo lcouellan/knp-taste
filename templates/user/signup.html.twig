@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    Knp Taste - Signup
+{% endblock %}
+{% block content %}
+    <h1 class="text-center">Signup</h1>
+    <div class="container">
+        <div class="row">
+            {% if errors is defined %}
+                <p class="text-danger">The username or the email is already used</p>
+            {% endif %}
+            <div class="col-12">
+                {{ form(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

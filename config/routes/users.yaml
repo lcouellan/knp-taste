@@ -1,0 +1,3 @@
+signup:
+  path: /signup
+  controller: App\Controller\UserController:signupAction
