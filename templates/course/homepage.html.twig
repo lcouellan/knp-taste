@@ -3,5 +3,19 @@
     Knp Taste - Homepage
 {% endblock %}
 {% block content %}
-    <h1>Welcome to the homepage</h1>
+    {% for label, messages in app.flashes(['warning', 'error']) %}
+        {% for message in messages %}
+            <div class="container">
+                <div class="row">
+                    <p class="text-danger">{{ message }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    <div class="container">
+        <div class="row">
+
+            <h1 class="text-center">Welcome to the homepage</h1>
+        </div>
+    </div>
 {% endblock %}
