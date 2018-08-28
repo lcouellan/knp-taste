@@ -2,5 +2,7 @@ view_all_courses:
   path: /courses
   controller: App\Controller\CourseController:viewAllCourses
 view_course:
+  requirements:
+    id: '\d+'
   path: /course/{id}
   controller: App\Controller\CourseController:viewCourse

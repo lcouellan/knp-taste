@@ -5,8 +5,6 @@ App\Entity\User:
         id:
             type: integer
             nullable: false
-            options:
-                unsigned: false
             id: true
             generator:
                 strategy: IDENTITY
@@ -25,4 +23,3 @@ App\Entity\User:
             unique: true
             nullable: false
             length: 30
-    lifecycleCallbacks: {  }

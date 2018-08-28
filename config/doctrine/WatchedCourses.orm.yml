@@ -1,12 +1,10 @@
-App\Entity\UserCourse:
+App\Entity\WatchedCourses:
     type: entity
-    table: user_course
+    table: watched_courses
     id:
         id:
             type: integer
             nullable: false
-            options:
-                unsigned: false
             id: true
             generator:
                 strategy: IDENTITY
@@ -14,8 +12,6 @@ App\Entity\UserCourse:
         watchedAt:
             type: datetime
             nullable: false
-            options:
-                fixed: false
     manyToOne:
         course:
             targetEntity: Course
@@ -27,4 +23,3 @@ App\Entity\UserCourse:
             joinColumn:
                 name: user_id
                 referencedColumnName: id
-    lifecycleCallbacks: {  }

@@ -3,9 +3,9 @@
 namespace App\Entity;
 
 /**
- * UserCourse
+ * WatchedCourses
  */
-class UserCourse
+class WatchedCourses
 {
     /**
      * @var int
@@ -27,13 +27,12 @@ class UserCourse
      */
     private $user;
 
-
     /**
      * Get id.
      *
      * @return int
      */
-    public function getId()
+    public function getId() : int
     {
         return $this->id;
     }
@@ -43,13 +42,11 @@ class UserCourse
      *
      * @param \DateTime $watchedAt
      *
-     * @return UserCourse
+     * @return void
      */
-    public function setWatchedAt($watchedAt)
+    public function setWatchedAt(\DateTime $watchedAt) : void
     {
         $this->watchedAt = $watchedAt;
-
-        return $this;
     }
 
     /**
@@ -57,7 +54,7 @@ class UserCourse
      *
      * @return \DateTime
      */
-    public function getWatchedAt()
+    public function getWatchedAt() : \DateTime
     {
         return $this->watchedAt;
     }
@@ -67,21 +64,18 @@ class UserCourse
      *
      * @param \App\Entity\Course|null $course
      *
-     * @return UserCourse
      */
-    public function setCourse(\App\Entity\Course $course = null)
+    public function setCourse(\App\Entity\Course $course = null) : void
     {
         $this->course = $course;
-
-        return $this;
     }
 
     /**
      * Get course.
      *
-     * @return \App\Entity\Course|null
+     * @return Course|null
      */
-    public function getCourse()
+    public function getCourse() : ?Course
     {
         return $this->course;
     }
@@ -89,23 +83,19 @@ class UserCourse
     /**
      * Set user.
      *
-     * @param \App\Entity\User|null $user
-     *
-     * @return UserCourse
+     * @param User $user
      */
-    public function setUser(\App\Entity\User $user = null)
+    public function setUser(User $user = null) : void
     {
         $this->user = $user;
-
-        return $this;
     }
 
     /**
      * Get user.
      *
-     * @return \App\Entity\User|null
+     * @return User|null
      */
-    public function getUser()
+    public function getUser() : ?User
     {
         return $this->user;
     }
