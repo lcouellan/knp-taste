@@ -1,0 +1,30 @@
+App\Entity\UserCourse:
+    type: entity
+    table: user_course
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        watchedAt:
+            type: datetime
+            nullable: false
+            options:
+                fixed: false
+    manyToOne:
+        course:
+            targetEntity: Course
+            joinColumn:
+                name: course_id
+                referencedColumnName: id
+        user:
+            targetEntity: User
+            joinColumn:
+                name: user_id
+                referencedColumnName: id
+    lifecycleCallbacks: {  }

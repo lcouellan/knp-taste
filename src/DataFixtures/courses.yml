@@ -1,0 +1,13 @@
+App\Entity\Course:
+  course1:
+    name: 'Recherche full-text avec Elastic Search'
+    youtubeLink: 'https://www.youtube.com/embed/58YDGuj30d0'
+  course2:
+    name: 'Lightning Talk : Meteor '
+    youtubeLink: 'https://www.youtube.com/embed/d4H4J00t3hI"'
+  course3:
+    name: 'Architecture CSS avec ITCSS et InuitCSS'
+    youtubeLink: 'https://www.youtube.com/embed/W4S2nrhRGzs'
+  course4:
+    name: 'Lightning Talk : Docsify '
+    youtubeLink: 'https://www.youtube.com/embed/nDQS0Fw4Gxg"'

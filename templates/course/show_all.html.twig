@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    Knp Taste - All courses
+{% endblock %}
+{% block content %}
+    <h1 class="text-center">Courses</h1>
+    <div class="container">
+        <div class="row">
+            {% for course in courses %}
+                <div class="card col-6">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ course.name }}</h5>
+                        <a href="{{ path('view_course', { id : course.id }) }}" class="btn btn-primary">See the course</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
