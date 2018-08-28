@@ -12,6 +12,15 @@
             </div>
         {% endfor %}
     {% endfor %}
+    {% for label, messages in app.flashes(['success']) %}
+        {% for message in messages %}
+            <div class="container">
+                <div class="row">
+                    <p class="text-success">{{ message }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    {% endfor %}
     <div class="container">
         <div class="row">
 
