@@ -4,15 +4,14 @@ namespace App\Entity;
 
 use Knp\Rad\User\HasPassword;
 
-
 class User implements HasPassword
 {
+
+    use HasPassword\HasPassword;
 
     private $id;
 
     private $email;
-
-    private $plainPassword;
 
     private $password;
 
@@ -35,18 +34,6 @@ class User implements HasPassword
         return $this;
     }
 
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
-
-    public function setPassword($password): self
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
     public function getUsername(): ?string
     {
         return $this->username;
@@ -57,16 +44,6 @@ class User implements HasPassword
         $this->username = $username;
 
         return $this;
-    }
-
-    public function getPlainPassword(): ?string
-    {
-        return $this->plainPassword;
-    }
-
-    public function setPlainPassword($plainPassword): void
-    {
-        $this->plainPassword = $plainPassword;
     }
 
     /**

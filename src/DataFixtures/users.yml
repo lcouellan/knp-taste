@@ -1,0 +1,9 @@
+App\Entity\User:
+  user1:
+    username: 'johndoe'
+    email: 'john@doe.com'
+    plainPassword: 'johndoe123'
+  user2:
+    username: 'janedoe'
+    email: 'jane@doe.com'
+    plainPassword: 'janedoe123'
