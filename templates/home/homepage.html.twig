@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    Knp Taste - Homepage
+{% endblock %}
+{% block content %}
+    {% for label, messages in app.flashes(['warning', 'error']) %}
+        {% for message in messages %}
+            <div class="container">
+                <div class="row">
+                    <p class="text-danger">{{ message }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for label, messages in app.flashes(['success']) %}
+        {% for message in messages %}
+            <div class="container">
+                <div class="row">
+                    <p class="text-success">{{ message }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    <div class="container">
+        <div class="row">
+
+            <h1 class="text-center">Welcome to the homepage</h1>
+        </div>
+    </div>
+{% endblock %}

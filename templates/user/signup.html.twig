@@ -10,7 +10,17 @@
                 <p class="text-danger">The username or the email is already used</p>
             {% endif %}
             <div class="col-12">
-                {{ form(form) }}
+                {{ form_start(form, { 'attr': {'class' : 'form'}}) }}
+                {{ form_row(form.username, { 'attr': {'class' : 'form-control'}}) }}
+                {{ form_row(form.email, { 'attr': {'class' : 'form-control'}}) }}
+                {% for passwordField in form.password %}
+                    <div class="form-field">
+                        {{ form_label(passwordField, null, { 'attr': {'class': 'form-label'} }) }}
+                        {{ form_widget(passwordField, { 'attr': {'class': 'form-control'} }) }}
+                    </div>
+                {% endfor %}
+                {{ form_widget(form.validate, { 'attr': {'class' : 'btn-outline-primary mt-1'}}) }}
+                {{ form_end(form) }}
             </div>
         </div>
     </div>

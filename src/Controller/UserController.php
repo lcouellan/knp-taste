@@ -8,6 +8,8 @@ use App\Entity\Course;
 use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,11 +17,25 @@ use Symfony\Component\Validator\Validation;
 
 class UserController extends AbstractController
 {
+
+    /**
+     * Page for new member subscription
+     *
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function signupAction(Request $request)
     {
         $form = $this->createFormBuilder()
             ->add('username', TextType::class)
             ->add('email', EmailType::class)
+            ->add('password', RepeatedType::class, [
+                'type' => PasswordType::class,
+                'invalid_message' => 'The password fields must match',
+                'required' => true,
+                'first_options' => ['label' => 'Password'],
+                'second_options' => ['label' => 'Repeat password']
+            ])
             ->add('validate', SubmitType::class)
             ->getForm()
         ;
@@ -53,7 +69,7 @@ class UserController extends AbstractController
                 ->findOneBy(['username' => $data['username']])
             ;
 
-
+            // User is not validated, error displayed
             if (count($errors) > 0 || $userSameEmail instanceof User || $userSameUsername instanceof User) {
 
                 $errorsString = (string) $errors;
