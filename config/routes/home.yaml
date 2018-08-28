@@ -1,0 +1,12 @@
+homepage:
+  path: /
+  controller: App\Controller\HomeController:homepageAction
+aboutus:
+  path: /about-us
+  controller: App\Controller\HomeController:aboutusAction
+contact:
+  path: /contact
+  controller: App\Controller\HomeController:contactAction
+pricing:
+  path: /pricing
+  controller: App\Controller\HomeController:pricingAction

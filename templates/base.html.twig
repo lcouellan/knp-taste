@@ -12,16 +12,24 @@
 {% block header %}
     <header class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
         <h5 class="my-0 mr-md-auto font-weight-normal">
-            <img src="{{ asset('img/knp-logo.jpeg') }}" width="80px" alt="Knp Logo" />
-            <span class="header-title">Knp Taste</span>
+            <a href="{{ path('homepage') }}">
+                <img src="{{ asset('img/knp-logo.jpeg') }}" width="80px" alt="Knp Logo" />
+                <span class="header-title">Knp Taste</span>
+            </a>
         </h5>
         <nav class="my-2 my-md-0 mr-md-3">
             <a class="p-2 text-dark" href="{{ path('view_all_courses') }}">See all courses</a>
-            <a class="p-2 text-dark" href="#">About us</a>
-            <a class="p-2 text-dark" href="#">Contact</a>
-            <a class="p-2 text-dark" href="#">Pricing</a>
+            <a class="p-2 text-dark" href="{{ path('aboutus') }}">About us</a>
+            <a class="p-2 text-dark" href="{{ path('contact') }}">Contact</a>
+            <a class="p-2 text-dark" href="{{ path('pricing') }}">Pricing</a>
         </nav>
-        <a class="btn btn-outline-primary" href="{{ path('signup') }}">Sign up</a>
+
+        {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+            <span>Connected</span>
+        {% else %}
+            <a class="btn btn-outline-primary" href="{{ path('signup') }}">Sign up</a>
+            <a class="btn btn-outline-primary ml-1" href="{{ path('login') }}">Sign in</a>
+        {% endif %}
     </header>
 {% endblock %}
 <main>
