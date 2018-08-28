@@ -49,9 +49,7 @@ class UserController extends AbstractController
             $user = new User();
             $user->setUsername($data['username']);
             $user->setEmail($data['email']);
-
-            //TODO: Fix with the rad user
-            $user->setPassword('aaa');
+            $user->setPlainPassword($data['password']);
 
 
             // Validate the user

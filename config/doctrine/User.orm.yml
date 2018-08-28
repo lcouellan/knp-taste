@@ -25,8 +25,4 @@ App\Entity\User:
             unique: true
             nullable: false
             length: 30
-        salt:
-            type: string
-            nullable: false
-            length: 255
     lifecycleCallbacks: {  }

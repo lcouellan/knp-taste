@@ -17,9 +17,6 @@ class UserFixtures extends Fixture
 
         /** @var User $user */
         foreach ($objectSet->getObjects() as $user) {
-
-            // TODO : Fix issue with rad User
-            $user->setPassword('aa');
             $manager->persist($user);
         }
         $manager->flush();
