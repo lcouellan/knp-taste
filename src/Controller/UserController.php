@@ -34,17 +34,18 @@ class UserController extends AbstractController
         $formView = $form->createView();
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            /** @var User $user */
             $user = $form->getData();
 
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($user);
+            $user->setRoles(['ROLE_USER']);
             $manager->flush();
-
-            //TODO: Connect the user
 
             // Redirect the user to the homepage
             $session = $this->container->get('session');
-            $session->getFlashBag()->add('success', 'You are now connected');
+            $session->getFlashBag()->add('success', 'Your account has been successfully created');
             return $this->redirectToRoute('homepage');
         }
 
