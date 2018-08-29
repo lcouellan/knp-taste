@@ -23,6 +23,7 @@
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.0",
         "nelmio/alice": "^3.4",
+        "phpspec/phpspec": "^5.0",
         "symfony/debug-pack": "^1.0",
         "symfony/dotenv": "^4.1",
         "symfony/maker-bundle": "^1.6"
