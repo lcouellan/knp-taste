@@ -3,7 +3,9 @@ App\Entity\User:
     username: 'johndoe'
     email: 'john@doe.com'
     plainPassword: 'johndoe123'
+    roles: ['ROLE_USER']
   user2:
     username: 'janedoe'
     email: 'jane@doe.com'
     plainPassword: 'janedoe123'
+    roles: ['ROLE_USER','ROLE_ADMIN']

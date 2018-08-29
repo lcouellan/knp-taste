@@ -15,9 +15,9 @@
                 {{ form_row(form.email, { 'attr': {'class' : 'form-control'}}) }}
                 {% for passwordField in form.plainPassword %}
                     <div class="form-field">
-                        {{ form_errors(passwordField) }}s
                         {{ form_label(passwordField, null, { 'attr': {'class': 'form-label'} }) }}
                         {{ form_widget(passwordField, { 'attr': {'class': 'form-control'} }) }}
+                        {{ form_errors(passwordField) }}
                     </div>
                 {% endfor %}
                 {{ form_widget(form.validate, { 'attr': {'class' : 'btn-outline-primary mt-1'}}) }}

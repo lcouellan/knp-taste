@@ -18,6 +18,8 @@ class User implements HasPassword, UserInterface
 
     private $username;
 
+    private $roles;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,11 +71,21 @@ class User implements HasPassword, UserInterface
      * and populated in any number of different ways when the user object
      * is created.
      *
-     * @return (Role|string)[] The user roles
+     * @return string[] The user roles
      */
-    public function getRoles()
+    public function getRoles() : array
     {
-        return ['ROLE_USER'];
+        $roles = $this->roles;
+        // give everyone ROLE_USER!
+        if (!in_array('ROLE_USER', $roles)) {
+            $roles[] = 'ROLE_USER';
+        }
+        return $roles;
+    }
+
+    public function setRoles(array $roles) : void
+    {
+        $this->roles = $roles;
     }
 
     /**
