@@ -13,8 +13,9 @@
                 {{ form_start(form, { 'attr': {'class' : 'form'}}) }}
                 {{ form_row(form.username, { 'attr': {'class' : 'form-control'}}) }}
                 {{ form_row(form.email, { 'attr': {'class' : 'form-control'}}) }}
-                {% for passwordField in form.password %}
+                {% for passwordField in form.plainPassword %}
                     <div class="form-field">
+                        {{ form_errors(passwordField) }}s
                         {{ form_label(passwordField, null, { 'attr': {'class': 'form-label'} }) }}
                         {{ form_widget(passwordField, { 'attr': {'class': 'form-control'} }) }}
                     </div>
