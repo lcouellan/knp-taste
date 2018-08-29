@@ -1,4 +1,5 @@
 App\Entity\WatchedCourses:
+    repositoryClass: App\Repository\WatchedCoursesRepository
     type: entity
     table: watched_courses
     id:

@@ -5,6 +5,10 @@ namespace App\Controller;
 
 
 use App\Entity\Course;
+use App\Entity\User;
+use App\Entity\WatchedCourses;
+use App\Service\CourseAccessControl;
+use App\Service\PersistCourseWatched;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CourseController extends AbstractController
@@ -38,9 +42,11 @@ class CourseController extends AbstractController
      * Page for watch the course
      *
      * @param $id : id of the course
+     * @param CourseAccessControl $accessControl
+     * @param PersistCourseWatched $persister
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function viewCourse($id)
+    public function viewCourse($id, CourseAccessControl $accessControl, PersistCourseWatched $persister)
     {
         $course = $this->getDoctrine()->getRepository(Course::class)->find($id);
 
@@ -51,8 +57,24 @@ class CourseController extends AbstractController
             return $this->redirectToRoute('homepage');
         }
 
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+
+        if($user instanceof User && $accessControl->isAbleToWatch($user)) {
+            $watchedCourse = new WatchedCourses();
+            $watchedCourse->setCourse($course);
+            $watchedCourse->setUser($user);
+            $watchedCourse->setWatchedAt(new \DateTime());
+            $persister->persist($watchedCourse);
+        } else {
+            return $this->render('course/show.html.twig', [
+                'course' => $course,
+                'display' => false
+            ]);
+        }
+
         return $this->render('course/show.html.twig', [
-            'course' => $course
+            'course' => $course,
+            'display' => true
         ]);
     }
 }
