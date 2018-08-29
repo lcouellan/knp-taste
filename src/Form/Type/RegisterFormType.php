@@ -30,8 +30,7 @@ class RegisterFormType extends AbstractType
                 'second_options' => ['label' => 'Repeat password'],
                 'constraints' => [
                     new Length([
-                        'min' => 4,
-                        'max' => 10
+                        'min' => 8
                     ])
                 ]
             ])

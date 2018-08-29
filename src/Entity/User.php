@@ -2,8 +2,11 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use Knp\Rad\User\HasPassword;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
 
 class User implements HasPassword, UserInterface
 {
@@ -98,5 +101,15 @@ class User implements HasPassword, UserInterface
     public function getSalt()
     {
         return null;
+    }
+
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
+    {
+        $metadata->addConstraint(new UniqueEntity([
+            'fields'  => 'email',
+        ]));
+        $metadata->addConstraint(new UniqueEntity([
+            'fields'  => 'username',
+        ]));
     }
 }
