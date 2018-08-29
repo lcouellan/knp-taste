@@ -10,6 +10,8 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
 
 class WatchedCoursesRepository extends ServiceEntityRepository
 {
+    CONST ALIAS = 'wc';
+
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, WatchedCourses::class);
@@ -20,17 +22,36 @@ class WatchedCoursesRepository extends ServiceEntityRepository
      * @return QueryBuilder $qb
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function getNumberOfCoursesWatchedByUser(User $user)
+    private function buildCoursesWatchedByUser(User $user, QueryBuilder $qb = null): QueryBuilder
     {
-        $qb = $this->createQueryBuilder('wc');
-        return $qb
-            ->select($qb->expr()->count('wc.id'))
-            ->where($qb->expr()->eq('wc.user', ':user'))
-            ->setParameter('user', $user)
-            ->setMaxResults(1)
-            ->getQuery()
-            ->getSingleScalarResult()
-            ;
+        $qb = $qb ?: $this->createQueryBuilder(self::ALIAS);
 
+        return $qb
+            ->andWhere('wc.user = :user')
+            ->setParameter('user', $user)
+        ;
+    }
+
+    private function buildCoursesWatchedUntil(\DateTime $dateTime, QueryBuilder $qb = null): QueryBuilder
+    {
+        $qb = $qb ?: $this->createQueryBuilder(self::ALIAS);
+
+        return $qb
+            ->andWhere($qb->expr()->gt('wc.watchedAt', ':date'))
+            ->setParameter('date', $dateTime)
+        ;
+    }
+
+    public function getCoursesWatchedByUserUntil(User $user, \DateTime $dateTime)
+    {
+        $qb = $this->createQueryBuilder(self::ALIAS);
+
+        $qb = $this->buildCoursesWatchedByUser($user, $qb);
+        $qb = $this->buildCoursesWatchedUntil($dateTime, $qb);
+
+        return $qb
+            ->getQuery()
+            ->getResult()
+        ;
     }
 }
