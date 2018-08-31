@@ -4,6 +4,7 @@
 namespace App\Form\Type;
 
 use App\Entity\User;
+use App\Validator\Constraint\UniqueConstraint;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -20,8 +21,16 @@ class RegisterFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username', TextType::class)
-            ->add('email', EmailType::class)
+            ->add('username', TextType::class, [
+                'constraints' => [
+                    new UniqueConstraint(['field' => 'username', 'entity' => User::class])
+                ]
+            ])
+            ->add('email', EmailType::class, [
+                'constraints' => [
+                    new UniqueConstraint(['field' => 'email', 'entity' => User::class])
+                ]
+            ])
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'The password fields must match',
