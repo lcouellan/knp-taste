@@ -40,7 +40,6 @@ class UserController extends AbstractController
 
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($user);
-            $user->setRoles(['ROLE_USER']);
             $manager->flush();
 
             // Redirect the user to the homepage
