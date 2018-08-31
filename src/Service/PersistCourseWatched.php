@@ -5,6 +5,7 @@ namespace App\Service;
 
 
 use App\Entity\WatchedCourses;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -14,11 +15,11 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
 class PersistCourseWatched
 {
 
-    private $registry;
+    private $manager;
 
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ObjectManager $manager)
     {
-        $this->registry = $registry;
+        $this->manager = $manager;
     }
 
     /**
@@ -28,9 +29,8 @@ class PersistCourseWatched
      */
     public function persist(WatchedCourses $watchedCourse): void
     {
-        $manager = $this->registry->getManager();
-        $manager->persist($watchedCourse);
-        $manager->flush();
+        $this->manager->persist($watchedCourse);
+        $this->manager->flush();
     }
 
 }

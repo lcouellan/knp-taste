@@ -42,11 +42,10 @@ class CourseController extends AbstractController
      * Page for watch the course
      *
      * @param $id : id of the course
-     * @param CourseAccessControl $accessControl
      * @param PersistCourseWatched $persister
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function viewCourse($id, PersistCourseWatched $persister)
+    public function viewCourse(int $id, PersistCourseWatched $persister)
     {
         $course = $this->getDoctrine()->getRepository(Course::class)->find($id);
 
@@ -59,12 +58,10 @@ class CourseController extends AbstractController
 
         $this->denyAccessUnlessGranted(['ROLE_ADMIN', 'view'], $course);
 
+        /** @var User $user */
         $user = $this->get('security.token_storage')->getToken()->getUser();
 
-        $watchedCourse = new WatchedCourses();
-        $watchedCourse->setCourse($course);
-        $watchedCourse->setUser($user);
-        $watchedCourse->setWatchedAt(new \DateTime());
+        $watchedCourse = $user->watch($course);
         $persister->persist($watchedCourse);
 
         return $this->render('course/show.html.twig', [

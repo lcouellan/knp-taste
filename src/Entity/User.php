@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use Symfony\Component\Validator\Constraints as Assert;
 use Knp\Rad\User\HasPassword;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -22,6 +21,13 @@ class User implements HasPassword, UserInterface
     private $username;
 
     private $roles;
+
+    private $persister;
+
+    public function __construct()
+    {
+        $this->setRoles(['ROLE_USER']);
+    }
 
     public function getId(): ?int
     {
@@ -111,5 +117,14 @@ class User implements HasPassword, UserInterface
         $metadata->addConstraint(new UniqueEntity([
             'fields'  => 'username',
         ]));
+    }
+
+    public function watch(Course $course): WatchedCourses
+    {
+        $watchedCourse = new WatchedCourses();
+        $watchedCourse->setCourse($course);
+        $watchedCourse->setUser($this);
+        $watchedCourse->setWatchedAt(new \DateTime());
+        return $watchedCourse;
     }
 }
