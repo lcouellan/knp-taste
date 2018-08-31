@@ -109,16 +109,6 @@ class User implements HasPassword, UserInterface
         return null;
     }
 
-    public static function loadValidatorMetadata(ClassMetadata $metadata)
-    {
-        $metadata->addConstraint(new UniqueEntity([
-            'fields'  => 'email',
-        ]));
-        $metadata->addConstraint(new UniqueEntity([
-            'fields'  => 'username',
-        ]));
-    }
-
     public function watch(Course $course): WatchedCourses
     {
         $watchedCourse = new WatchedCourses();
