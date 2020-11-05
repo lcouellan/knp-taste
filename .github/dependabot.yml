@@ -1,0 +1,29 @@
+---
+  version: 2
+  updates:
+    - package-ecosystem: composer
+      labels:
+        - dependencies
+        - php
+        - 'ready to merge'
+      schedule:
+        interval: daily
+        time: '00:00'
+      open-pull-requests-limit: 99
+      automerged_updates:
+        - match:
+          dependency_type: "all"
+          update_type: "semver:patch"
+    - package-ecosystem: docker
+      directory: .
+      labels:
+        - dependencies
+        - docker
+        - 'ready to merge'
+      schedule:
+        interval: daily
+        time: '00:00'
+        automerged_updates:
+          - match:
+            dependency_type: "all"
+            update_type: "semver:patch"
